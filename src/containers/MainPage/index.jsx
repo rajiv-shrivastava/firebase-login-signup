@@ -37,9 +37,15 @@ class MainPage extends React.Component {
 
     return (
           <div  className="container-fluid">
+            
             <h3 className="text-center"> Firebase basic Signup/Login App </h3>
             <hr />
-            <div className="row">              
+            <div className="row">
+            {
+            this.props.userError && this.props.userError.length > 0 ? 
+             <div className="alert alert-danger"> {this.props.userError} </div> : 
+            '' }
+
             <LoginComponent userSignIn={this.props.userSignIn}/> 
           </div>
           </div>      
@@ -52,7 +58,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.userReducer.user || [],
     userLoading: state.userReducer.userLoading || false,
-    userError: state.userReducer.photosError || ''
+    userError: state.userReducer.userError || ''
   };
 }
 

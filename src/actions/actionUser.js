@@ -6,7 +6,7 @@
 */
 
 // import axios from "./axios";
-import { SIGNIN_USER } from "./actionTypes";
+import { SIGNIN_USER,SIGNUP_USER } from "./actionTypes";
 import fire from "../config/fire";
 
 
@@ -84,7 +84,7 @@ export const signOutSuccess = () => {
 export const userSignUp = (email,password) => {
   return (dispatch) => {
     dispatch(signupLoading())
-    return fire.auth().signupWithEmailAndPassword(email,password).then(u => {
+    return fire.auth().createUserWithEmailAndPassword(email,password).then(u => {
       console.log("Signup success",u)
       dispatch(signupSuccess(u))
     }).catch(error => {

@@ -5,7 +5,7 @@
 
 */
 
-import { SIGNIN_USER } from "../actions/actionTypes";
+import { SIGNIN_USER,SIGNUP_USER } from "../actions/actionTypes";
 
 const INITIAL_STATE = {
   userLoading: false,
@@ -39,7 +39,7 @@ export default function(state = INITIAL_STATE, action) {
             user: action.payload.error,
             userLoading: false,
             usersignedOut: false,
-            userError: "Something went wrong"
+            userError: action.payload.message
           };
 
     case `SIGN_OUT_SUCCESS`:
@@ -50,6 +50,32 @@ export default function(state = INITIAL_STATE, action) {
           userError: "",
           usersignedOut: true
         };
+
+    case `${SIGNUP_USER}_LOADING`:
+      return {
+        ...state,
+        user: [],
+        userLoading: true,
+        usersignedOut: false
+      };
+    case `${SIGNUP_USER}_SUCCESS`:
+      console.log("payload",action.payload)
+      return {
+        ...state,
+        user: action.payload.user || {},
+        userLoading: false,
+        usersignedOut: false
+      };
+
+    case `${SIGNUP_USER}_FAILURE`:
+        console.log("payload",action.payload.user)  
+        return {
+            ...state,
+            user: action.payload.error,
+            userLoading: false,
+            usersignedOut: false,
+            userError: action.payload.message
+          };
 
     default:
       return state;
