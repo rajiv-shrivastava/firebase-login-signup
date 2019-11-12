@@ -1,7 +1,7 @@
 import React from "react";
 import PhotoComponent from "../../components/LoginComponent";
 import { connect } from "react-redux";
-import { userSignIn } from "../../actions/actionMain";
+import { userSignIn } from "../../actions/actionUser";
 import './style.css'
 import fire from "../../config/fire";
 import LoginComponent from "../../components/LoginComponent";
@@ -49,9 +49,9 @@ class MainPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.usersReducer.users || [],
-    usersLoading: state.usersReducer.usersLoading || false,
-    usersError: state.usersReducer.photosError || ''
+    user: state.userReducer.user || [],
+    userLoading: state.userReducer.userLoading || false,
+    userError: state.userReducer.photosError || ''
   };
 }
 

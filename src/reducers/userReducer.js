@@ -8,9 +8,9 @@
 import { SIGNIN_USER } from "../actions/actionTypes";
 
 const INITIAL_STATE = {
-  usersLoading: false,
-  users: [],
-  usersError: null,
+  userLoading: false,
+  user: [],
+  userError: null,
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -18,23 +18,25 @@ export default function(state = INITIAL_STATE, action) {
     case `${SIGNIN_USER}_LOADING`:
       return {
         ...state,
-        users: [],
-        usersLoading: true
+        user: [],
+        userLoading: true
       };
     case `${SIGNIN_USER}_SUCCESS`:
+      console.log("payload",action.payload)
       return {
         ...state,
-        users: action.payload.data || [],
-        usersLoading: false
+        user: action.payload.user || {},
+        userLoading: false
       };
 
     case `${SIGNIN_USER}_FAILURE`:
-      return {
-        ...state,
-        users: [],
-        usersLoading: false,
-        usersError: "Something went wrong"
-      };
+        console.log("payload",action.payload.user)  
+        return {
+            ...state,
+            user: action.payload.error,
+            userLoading: false,
+            userError: "Something went wrong"
+          };
 
     default:
       return state;
