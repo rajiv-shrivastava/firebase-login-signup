@@ -9,7 +9,7 @@
 import React, { Component } from "react";
 // import './style.css'
 
-import fire from "../../config/fire";
+import {Link} from 'react-router';
 
 // signupForFirebase = () => {
 //   fire.auth().createUserWithEmailAndPassword(email, password).then(u => {
@@ -26,7 +26,8 @@ export default class SignupComponent extends Component {
   render() {
     return (
       <div>
-        <h1> Sign Up </h1>
+        <h1 className="text-center"> Sign Up </h1> 
+        
       
       <form>
           <div className="form-group">
@@ -41,6 +42,10 @@ export default class SignupComponent extends Component {
           </div>
           <button type="submit" className="btn btn-primary">Sign In</button>
         </form>
+        <div className="row container">
+          Already have Account ?
+          <Link href="/" >Login</Link>
+          </div>
         </div> 
     );
   }

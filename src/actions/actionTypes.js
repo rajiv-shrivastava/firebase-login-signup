@@ -5,8 +5,10 @@
 
 */
 
-const SIGNIN_USER = 'FETCH_USERS';
+const SIGNIN_USER = 'SIGNIN_USER';
+const SIGNUP_USER = 'SIGNUP_USER'; 
 
 module.exports = {
-  SIGNIN_USER
+  SIGNIN_USER,
+  SIGNUP_USER
 }

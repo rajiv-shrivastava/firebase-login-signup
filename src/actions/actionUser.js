@@ -10,6 +10,10 @@ import { SIGNIN_USER } from "./actionTypes";
 import fire from "../config/fire";
 
 
+
+
+//Sign in logic starts here
+
 //Async Action for firebase sign in
 export const userSignIn = (email,password) => {
   return (dispatch) => {
@@ -44,3 +48,50 @@ export const signinFailure = (error) => {
     payload: error
   }
 };
+
+
+
+//Sign in logic ends here
+
+
+
+
+//Sign up logic starts here
+
+
+//Async Action for firebase sign out
+export const userSignUp = (email,password) => {
+  return (dispatch) => {
+    dispatch(signupLoading())
+    return fire.auth().signupWithEmailAndPassword(email,password).then(u => {
+      console.log("Signup success",u)
+      dispatch(signupSuccess(u))
+    }).catch(error => {
+      console.log("error",error)
+      dispatch(signupFailure(error))
+    })
+  }
+}
+
+export const signupLoading = () => {
+  return {
+    type: `${SIGNUP_USER}_LOADING`
+  }
+};
+
+export const signupSuccess = (user) => {
+  return {
+    type: `${SIGNUP_USER}_SUCCESS`,
+    payload: user
+  }
+};
+
+export const signupFailure = (error) => {
+  return {
+    type: `${SIGNUP_USER}_FAILURE`,
+    payload: error
+  }
+};
+
+
+//Sign up logic ends here

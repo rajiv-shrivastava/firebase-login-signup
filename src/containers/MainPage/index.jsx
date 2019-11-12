@@ -37,7 +37,8 @@ class MainPage extends React.Component {
 
     return (
           <div  className="container-fluid">
-            <h1> I am home page </h1>
+            <h3 className="text-center"> Firebase basic Signup/Login App </h3>
+            <hr />
             <div className="row">              
             <LoginComponent userSignIn={this.props.userSignIn}/> 
           </div>

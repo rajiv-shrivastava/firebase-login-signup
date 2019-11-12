@@ -8,7 +8,7 @@
 
 import React, { Component } from "react";
 import './style.css'
-import { Link } from "react-router";
+import { Link,Redirect,browserHistory } from "react-router";
 
 
 export default class LoginComponent extends Component {
@@ -27,7 +27,9 @@ export default class LoginComponent extends Component {
 
   loginToFireBase = (e) => {
     e.preventDefault();    
-    this.props.userSignIn(this.state.email,this.state.password)
+    this.props.userSignIn(this.state.email,this.state.password).then(() => {
+        browserHistory.push("/home")
+    })
   }
 
   render() {
