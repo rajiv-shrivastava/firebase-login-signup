@@ -54,6 +54,27 @@ export const signinFailure = (error) => {
 //Sign in logic ends here
 
 
+// sign out logic 
+
+export const userSignOut = () => {
+  return (dispatch) => {
+  return fire.auth().signOut().then(function() {
+    dispatch.signOutSuccess();
+  }).catch(function(error) {
+    // An error happened.
+  });
+ }
+}
+
+
+export const signOutSuccess = () => {
+  return {
+    type: 'SIGN_OUT_SUCCESS'
+  }
+};
+ 
+
+
 
 
 //Sign up logic starts here
