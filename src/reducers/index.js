@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import photosReducer from './photosReducer';
-import compareReducer from './compareReducer';
+import usersReducer from './usersReducer';
 
 const rootReducer = combineReducers({
-  photosReducer,
-  compareReducer
+  usersReducer
 });
 
 export default rootReducer;

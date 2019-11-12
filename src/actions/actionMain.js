@@ -5,31 +5,42 @@
 
 */
 
-import axios from "./axios";
-import { FETCH_PHOTOS,COMPARE_PHOTO,REMOVE_PHOTO } from "./actionTypes";
-import { bindActionCreators } from "redux";
+// import axios from "./axios";
+import { SIGNIN_USER } from "./actionTypes";
+import fire from "../config/fire";
 
-export function fetchPhotos() {
-  return {
-    type: FETCH_PHOTOS,
-    payload: axios.get("photos")
-  };
+
+//Async Action for firebase sign in
+export const userSignIn = (email,password) => {
+  return (dispatch) => {
+    dispatch(signinLoading())
+    return fire.auth().signInWithEmailAndPassword(email,password).then(u => {
+      console.log("Signup success",u)
+      dispatch(signinSuccess(u))
+    }).catch(error => {
+      console.log("error",error)
+      dispatch(signinFailure(error))
+    })
+  }
 }
 
 
-
-export function comparePhoto(photo) {
+export const signinLoading = () => {
   return {
-    type: COMPARE_PHOTO,
-    payload: photo
-  };
-}
+    type: `${SIGNIN_USER}_LOADING`
+  }
+};
 
-
-export function removePhoto(id) {
-  console.log(id)
+export const signinSuccess = (user) => {
   return {
-    type: REMOVE_PHOTO,
-    payload: id
-  };
-}
+    type: `${SIGNIN_USER}_SUCCESS`,
+    payload: user
+  }
+};
+
+export const signinFailure = (error) => {
+  return {
+    type: `${SIGNIN_USER}_FAILURE`,
+    payload: error
+  }
+};

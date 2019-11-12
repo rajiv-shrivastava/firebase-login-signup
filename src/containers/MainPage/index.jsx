@@ -1,45 +1,46 @@
 import React from "react";
-import PhotoComponent from "../../components/PhotoComponent";
+import PhotoComponent from "../../components/LoginComponent";
 import { connect } from "react-redux";
-import { fetchPhotos,comparePhoto} from "../../actions/actionMain";
+import { userSignIn } from "../../actions/actionMain";
 import './style.css'
-import CompareTable from "../CompareTable";
+import fire from "../../config/fire";
+import LoginComponent from "../../components/LoginComponent";
+
 
 
 class MainPage extends React.Component {
   constructor() {
     super();
+    this.state = {
+      user: {}
+    }
   }
+
   componentDidMount() {
-    this.props.fetchPhotos()
+    this.authListner()
+    // this.props.fetchPhotos()
   }
 
-  comparePhoto = (id) => {
-    let photo = this.props.photos.find((photo) => {return id == photo.id })
-    this.props.comparePhoto(photo)
-
+  authListner(){
+    fire.auth().onAuthStateChanged((user) => {
+      if(user){
+        this.setState({user})
+      }
+      else {
+        this.setState({user: null})
+      }
+    }) 
   }
-
-  renderData = () => {
-    const photos = this.props.photos.map(photo =>{
-      return(<div className="col-sm-3" key={photo.id}>
-          <PhotoComponent {...photo} comparePhoto={this.comparePhoto} /> 
-         </div>);
-     })
-     return photos.slice(0,9);
-  }
-
-
 
   
   render() {
 
     return (
           <div  className="container-fluid">
-            <div className="row">
-            {this.renderData()}
-            </div>
-            <CompareTable />
+            <h1> I am home page </h1>
+            <div className="row">              
+            <LoginComponent userSignIn={this.props.userSignIn}/> 
+          </div>
           </div>      
     )
 
@@ -48,15 +49,15 @@ class MainPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    photos: state.photosReducer.photos || [],
-    photosLoading: state.photosReducer.photosLoading || false,
-    photosError: state.photosReducer.photosError || ''
+    users: state.usersReducer.users || [],
+    usersLoading: state.usersReducer.usersLoading || false,
+    usersError: state.usersReducer.photosError || ''
   };
 }
 
 export default connect(
   mapStateToProps,
-  { fetchPhotos,comparePhoto }
+  { userSignIn }
 )(MainPage);
 
 
