@@ -1,6 +1,7 @@
 A basic app with react and firebase to represent login  and signup functionality.
 
-###Used 
+Used
+
 * React for User interface redux , firebase and axios to build this app
 * Redux for state management.
 * Thunk for async action management of redux.
